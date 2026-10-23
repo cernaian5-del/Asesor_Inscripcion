@@ -1,0 +1,27 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs y temporales
+*.log
+npm-debug.log*
+tmp/
+*.tmp
+
+# Secretos / configuración local (nunca subir)
+.env
+.env.*
+*.pem
+*.key
+
+# Archivos generados por SWI-Prolog
+*.qlf
+*.ql
+.swipl*

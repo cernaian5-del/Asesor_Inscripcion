@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Asesor de Inscripción de Materias</title>
+  <meta name="description" content="Sistema experto en Prolog que te ayuda a decidir qué materias puedes cursar.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="contenedor">
+      <h1>Asesor de Inscripción de Materias</h1>
+      <p class="sub">Indica qué materias ya aprobaste y el sistema experto (SWI-Prolog) te dirá qué puedes cursar, qué te falta y cómo llegar a tu meta.</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+
+    <div id="banner" class="aviso aviso-error" role="alert" hidden></div>
+
+    <div class="rejilla">
+      <!-- 1. Materias aprobadas -->
+      <section class="tarjeta" aria-labelledby="t-aprobadas">
+        <h2 id="t-aprobadas"><span class="num">1</span> Materias aprobadas</h2>
+        <div class="barra">
+          <input id="buscador" type="search" placeholder="Buscar materia…" aria-label="Buscar materia" autocomplete="off">
+          <button type="button" id="btn-limpiar-sel" class="btn btn-sec">Limpiar selección</button>
+        </div>
+        <p class="ayuda"><span id="contador">0</span> materia(s) seleccionada(s).</p>
+        <div id="lista-materias" class="lista-materias" aria-live="polite">
+          <p class="cargando">Cargando catálogo…</p>
+        </div>
+      </section>
+
+      <!-- 2. Consulta -->
+      <section class="tarjeta" aria-labelledby="t-consulta">
+        <h2 id="t-consulta"><span class="num">2</span> ¿Qué quieres saber?</h2>
+        <form id="form" novalidate>
+          <label for="tipo">Tipo de consulta</label>
+          <select id="tipo">
+            <option value="disponibles">Materias que puedo cursar ahora</option>
+            <option value="bloqueadas">Materias bloqueadas y qué me falta</option>
+            <option value="ruta">Ruta hacia una materia meta</option>
+            <option value="combinaciones">Combinaciones posibles de inscripción</option>
+          </select>
+          <p id="ayuda-tipo" class="ayuda"></p>
+
+          <div id="campo-meta" hidden>
+            <label for="meta">Materia meta</label>
+            <select id="meta"><option value="">— Elige una materia —</option></select>
+          </div>
+
+          <div id="campo-max" hidden>
+            <label for="max">Máximo de materias por semestre (1–10)</label>
+            <input id="max" type="number" min="1" max="10" step="1" value="5" inputmode="numeric">
+          </div>
+
+          <div class="acciones">
+            <button type="submit" id="btn-consultar" class="btn btn-pri">
+              <span class="spinner" aria-hidden="true" hidden></span>
+              <span id="btn-texto">Consultar</span>
+            </button>
+            <button type="button" id="btn-reiniciar" class="btn btn-sec">Nueva consulta</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <!-- 3. Resultados -->
+    <section class="tarjeta" aria-labelledby="t-res">
+      <h2 id="t-res"><span class="num">3</span> Resultados</h2>
+      <div id="estado" class="aviso" role="status" aria-live="polite" hidden></div>
+      <div id="resultados">
+        <p class="ayuda">Aquí aparecerán los resultados de tu consulta.</p>
+      </div>
+
+      <details id="panel-porque" class="porque" hidden>
+        <summary>¿Por qué? Reglas aplicadas por el sistema experto</summary>
+        <div id="porque-contenido"></div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="pie contenedor">
+    <p>ESCOM-IPN · Paradigmas de Programación · Práctica integradora. Todo el razonamiento se ejecuta en Prolog en el servidor; esta página solo muestra los resultados.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
